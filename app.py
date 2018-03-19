@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return "This is supposed to be the main page"
+    return render_template("index.html")
 
 port = os.getenv('PORT', '8080')
 if __name__ == "__main__":
