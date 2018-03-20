@@ -2,10 +2,13 @@ from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
+
+#   making a dictionary of all the sounds
 sounds = {}
 for folder in os.listdir("static/sounds"):
-    if folder[0] != "." and folder[-4:] != ".txt":              #don't want to grab hidden files
-        sounds[folder] = [sound for sound in os.listdir("static/sounds/{}".format(folder)) if sound[0] !="."]
+    path = "static/sounds/{}".format(folder)
+    if os.path.isdir(path):
+        sounds[folder] = [sound for sound in os.listdir(path) if sound[-4:] == ".wav"]
 
 @app.route("/")
 def main():

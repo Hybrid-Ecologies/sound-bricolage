@@ -5,8 +5,22 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   }]);
 
 app.controller("MainCtrl", function($scope, $mdDialog) {
-    $scope.button_press = function() {
-        var audio = new Audio('/sounds/alerts/Affirmative.wav');
+    $scope.init = function (sounds) {
+        $scope.sounds = sounds
+        console.log(sounds)
+    }
+
+    $scope.get_folders = function() {
+        return Object.keys($scope.sounds)
+    }
+
+    $scope.play_sound = function(folder, sound) {
+        console.log(folder, sound);
+        var audio = new Audio('/sounds/'+ folder + '/' + sound);
         audio.play();
+    }
+
+    $scope.select_folder = function(folder) {
+        $scope.selected_folder = folder;
     }
 });
