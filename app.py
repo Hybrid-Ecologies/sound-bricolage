@@ -14,9 +14,15 @@ for folder in os.listdir("static/sounds"):
 def main():
     return render_template("index.html", sounds = sounds)
 
+#route for static sound files
 @app.route("/sounds/<folder>/<sound>")
 def get_sound(folder, sound):
     return app.send_static_file('sounds/{}/{}'.format(folder, sound))
+
+# 404 handling
+@app.errorhandler(404)
+def page_not_found(e):
+    return "404: Page not found"
 
 port = os.getenv('PORT', '8080')
 if __name__ == "__main__":
