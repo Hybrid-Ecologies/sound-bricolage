@@ -14,6 +14,10 @@ for folder in os.listdir("static/sounds"):
 def main():
     return render_template("index.html", sounds = sounds)
 
+@app.route("/wordcloud")
+def word_cloud():
+    return render_template("wordcloud.html", sounds = sounds)
+
 #route for static sound files
 @app.route("/sounds/<folder>/<sound>")
 def get_sound(folder, sound):

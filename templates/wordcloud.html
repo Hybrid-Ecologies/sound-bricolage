@@ -1,8 +1,9 @@
 <html>
     <head>
         <title>
-            Sound-Bricolage
+            Sound-Bricolage WordCloud
         </title>
+        <meta charset="utf-8">  <!-- it's important for d3.js -->
         <!-- Angular Material CSS -->
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
         <!-- Angular Material requires Angular.js Libraries -->
@@ -12,15 +13,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script> 
         <!-- Angular Material Library -->
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <!-- Word Cloud Dependencies -->
+        <script src="{{ url_for('static', filename='node_modules/d3/build/d3.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='node_modules/d3-cloud/build/d3.layout.cloud.js')}}"></script>
+        <script src="{{ url_for('static', filename='node_modules/angular-d3-word-cloud/dist/angular-word-cloud.min.js')}}"></script>
     </head>
-    <body ng-app="MainApp" ng-controller="MainCtrl" ng-cloak ng-init="init({{sounds}})">   
+    <body ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{sounds}})">   
         <md-button ng-repeat="folder in folders" ng-click="select_folder(folder)" class="md-raised md-primary"><% folder %></md-button>
-        <div>
-            <md-button 
-                ng-repeat="sound in sounds[selected_folder]" 
-                ng-click="play_sound(selected_folder, sound)">
-                <% sound.slice(0, -4) %></md-button> 
-        </div>
-        <script src="{{url_for('static', filename='scripts/main.js')}}"></script>
+        <word-cloud 
+            words="words" 
+            width="500" 
+            height="500" 
+            padding="5"
+            rotate="rotate" 
+            use-tooltip="false"  
+            random="random" 
+            use-transition="true" 
+            on-click="play_sound"></word-cloud>
+        <script src="{{url_for('static', filename='scripts/wordcloud.js')}}"></script>
     </body>
 </html>

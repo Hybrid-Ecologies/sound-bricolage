@@ -4,13 +4,10 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
     $interpolateProvider.endSymbol('%>');
   }]);
 
-app.controller("MainCtrl", function($scope, $mdDialog) {
+app.controller("MainCtrl", function($scope) {
     $scope.init = function (sounds) {
-        $scope.sounds = sounds
-    }
-
-    $scope.get_folders = function() {
-        return Object.keys($scope.sounds)
+        $scope.sounds = sounds;
+        $scope.folders = Object.keys($scope.sounds);
     }
 
     $scope.select_folder = function(folder) {
