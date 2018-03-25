@@ -2,13 +2,32 @@ from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
+recreate_metadata = True
 
 #   making a dictionary of all the sounds
-sounds = {}
-for folder in os.listdir("static/sounds"):
-    path = "static/sounds/{}".format(folder)
-    if os.path.isdir(path):
-        sounds[folder] = [sound for sound in os.listdir(path) if sound[-4:] == ".wav"]
+if recreate_metadata:
+    folders = {}
+    sounds = {}
+    for folder_name in os.listdir("static/sounds"):
+        path = "static/sounds/{}".format(folder_name)
+        if os.path.isdir(path):
+            folder = {}
+            folders[folder_name] = folder
+            for filename in os.listdir(path):
+                if filename[-4:] == '.wav':
+                    sound = filename[:-4]
+                    sound_info ={ 
+                        'filename' : filename,
+                        'sound' : sound,
+                        'size' : os.path.getsize(path + "/" + filename),
+                        'folder' : folder_name
+                        }
+                    folder[sound] = sound_info
+                    sounds[sound] = sound_info
+else:
+     
+
+
 
 @app.route("/")
 def main():
@@ -28,6 +47,6 @@ def get_sound(folder, sound):
 def page_not_found(e):
     return "404: Page not found"
 
-port = os.getenv('PORT', '8080')
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(port))
+# port = os.getenv('PORT', '8080')
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', port=int(port))
