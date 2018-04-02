@@ -18,8 +18,8 @@
         <div>
             <md-button 
                 ng-repeat="sound in sounds[selected_folder]" 
-                ng-click="play_sound(selected_folder, sound)">
-                <% sound.slice(0, -4) %></md-button> 
+                ng-click="play_sound(selected_folder, sound.filename)">
+                <% sound.sound%></md-button> 
         </div>
         <script src="{{url_for('static', filename='scripts/main.js')}}"></script>
     </body>
