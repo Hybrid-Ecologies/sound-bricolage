@@ -7,11 +7,14 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
 app.controller("WordcloudCtrl", function($scope, $window, $element) {
 
     var max_word_size = screen.width * .05;
-    var min_word_size = max_word_size / 5
+    var min_word_size = max_word_size / 5;
+    var range_word_size = max_word_size - min_word_size;
+    var metadata;
 
-    $scope.init = function (sounds) {
+    $scope.init = function (sounds, meta_data) {
         $scope.sounds = sounds;
         $scope.folders = Object.keys(sounds);
+        metadata = meta_data;
         $scope.words = []
         }
 
@@ -19,12 +22,14 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
         $scope.selected_folder = folder;
         words = [];
         for (i in $scope.sounds[folder]){
-            sound_name = $scope.sounds[folder][i]
+            sound = $scope.sounds[folder][i];
+            var min_folder_size = metadata[folder].min_word_size;
+            var range_folder_size = metadata[folder].max_word_size - min_folder_size;
             words.push({
-                text: sound_name.slice(0, -4),
-                size: min_word_size + (max_word_size - min_word_size) * Math.random(),
+                text: sound.text,
+                size: min_word_size + (range_word_size) * (sound.size - min_folder_size)/range_folder_size,
                 color: '#'+Math.floor(Math.random()*16777215).toString(16),
-                filename: sound_name
+                filename: sound['filename']
             });
         }
         $scope.words = words;

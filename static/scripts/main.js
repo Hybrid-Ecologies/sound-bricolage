@@ -5,9 +5,13 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   }]);
 
 app.controller("MainCtrl", function($scope) {
-    $scope.init = function (sounds) {
+
+    var metadata;
+
+    $scope.init = function (sounds, meta_data) {
         $scope.sounds = sounds;
         $scope.folders = Object.keys($scope.sounds);
+        metadata = meta_data;
     }
 
     $scope.select_folder = function(folder) {

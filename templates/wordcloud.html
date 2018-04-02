@@ -18,7 +18,7 @@
         <script src="{{ url_for('static', filename='node_modules/d3-cloud/build/d3.layout.cloud.js')}}"></script>
         <script src="{{ url_for('static', filename='node_modules/angular-d3-word-cloud/dist/angular-word-cloud.min.js')}}"></script>
     </head>
-    <body ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{sounds}})">   
+    <body ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{folders}},{{metadata}})">   
         <md-button ng-repeat="folder in folders" ng-click="select_folder(folder)" class="md-raised md-primary"><% folder %></md-button>
         <word-cloud 
             words="words" 
