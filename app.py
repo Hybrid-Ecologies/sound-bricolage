@@ -12,8 +12,8 @@ for folder_name in os.listdir("static/sounds"):
     if os.path.isdir(path):
         folder = {}
         metadata[folder_name] = {
-            'max_word_size' : 0,
-            'min_word_size' : float('inf')
+            'max_file_size' : 0,
+            'min_file_size' : float('inf')
         }
         folders[folder_name] = folder
         for filename in os.listdir(path):
@@ -25,10 +25,10 @@ for folder_name in os.listdir("static/sounds"):
                     'size' : os.path.getsize(path + "/" + filename),
                     'folder' : folder_name
                     }
-                if sound_info['size'] > metadata[folder_name]['max_word_size']:
-                    metadata[folder_name]['max_word_size'] = sound_info['size']
-                if sound_info['size'] < metadata[folder_name]['min_word_size']:
-                    metadata[folder_name]['min_word_size'] = sound_info['size']
+                if sound_info['size'] > metadata[folder_name]['max_file_size']:
+                    metadata[folder_name]['max_file_size'] = sound_info['size']
+                if sound_info['size'] < metadata[folder_name]['min_file_size']:
+                    metadata[folder_name]['min_file_size'] = sound_info['size']
                 folder[sound] = sound_info
                 sounds[sound] = sound_info
 

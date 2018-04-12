@@ -22,27 +22,47 @@
     </head>
     <body class= "w-100 h-100"ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{folders}},{{metadata}})">
 
-		<div class="row">
-			<div class="col">
+		<div class="row justify-content-md-center">
+			<div class="col text-center">
 				<md-button ng-repeat="folder in folders" ng-click="select_folder(folder)" class="md-raised md-primary"><% folder %></md-button>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col">
+		<div class="row mt-4 justify-content-md-center">
+			<div class="col h-100" id="wordcloud-col">
 				<word-cloud 
-					width="500"
-					height="500"
+					width="wordcloud_width"
+					height="wordcloud_height"
 					words="words" 
 					padding="5"
 					rotate="rotate" 
 					use-tooltip="false"  
 					random="random" 
 					use-transition="true" 
-					on-click="play_sound"></word-cloud>
+					on-click="select_sound"></word-cloud>
 			</div>
-			<div class="col-3">
-				hello
+			<div class="col-4 mx-4 text-center">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Selected Sound:</h5>
+						<p class="card-text"><% selected_sound.text %></p>
+						<a ng-click="add_sound(selected_sound)" class="btn btn-primary">Add To Selection</a>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Selection</h5>
+						<ul class="list-group py-2">
+							<li ng-repeat="sound in selection" 
+								class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+								ng-click="play_sound(sound)">
+								<% sound.folder + '/' %> <b><% sound.text %></b>
+								<a ng-click="remove_sound(sound)" class="btn btn-warning">Remove</a>
+							</li>
+						</ul>
+						<a ng-click="download_selection(selection)" class="btn btn-primary">Download Selection</a>
+					</div>
+				</div>
 			</div>
 		</div>
 
