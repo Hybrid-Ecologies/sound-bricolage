@@ -45,6 +45,10 @@ def word_cloud():
 def pavlov():
 	return render_template("pavlov.html", folders = folders, metadata = metadata)
 
+@app.route("/patina")
+def patina():
+	return render_template("patina.html", folders = folders, metadata = metadata)
+
 #route for static sound files
 @app.route("/sounds/<folder>/<filename>")
 def get_sound(folder, filename):

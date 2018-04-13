@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Patina Button
+{% endblock %}
+
+{% block body %}
+	<div 
+		class="w-100 h-100"
+		ng-app="PatinaApp" 
+		ng-controller="PatinaCtrl" 
+		ng-init="init('{{url_for('static', filename='images/patina.jpg')}}')"
+		ng-cloak
+		>
+	<div class="row h-100 w-100 justify-content-md-center">
+		<img 
+			class="w-100 h-100"
+			id="patina-image" 
+			src="{{url_for('static', filename='images/patina.jpg')}}">
+		<div class="mt-5 d-flex flex-column w-100 text-center">
+			<div class="card mx-auto w-25">
+				<div class="card-body">
+					<h1>Patina Button</h1>
+					<h3>Current sound:</h3>
+					<h5><% sound.folder + " / "+ sound.text%></h5>
+					<a 
+						id="button"
+						ng-click="click()" 
+						class="btn btn-success">
+						Click Me!</a>
+				</div>
+			</div>
+			<p class="mt-auto">
+				Photo by Rene Böhmer on Unsplash
+			</p>
+
+		</div>
+	</div>
+		<!-- Custom JS -->
+		<script src="{{url_for('static', filename='scripts/patina.js')}}"></script>
+	</div>
+{% endblock %}
