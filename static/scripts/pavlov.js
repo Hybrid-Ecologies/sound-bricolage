@@ -30,7 +30,7 @@ app.controller("PavlovCtrl", function($scope, $window, $element, $interval) {
 				$('#button').css('left', Math.random() * max_x + "px");
 				$('#button').css('top', Math.random() * max_y + "px");
 			}
-		}, 1000);
+		}, 1500);
 		
 	
 	var decay = $interval(

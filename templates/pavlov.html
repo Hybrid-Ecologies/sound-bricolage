@@ -9,17 +9,19 @@
 		class="w-100 h-100"
 		ng-app="PavlovApp" 
 		ng-controller="PavlovCtrl" 
-		ng-init="init({{folders}},{{metadata}})"
 		ng-cloak>
 	<div class="row h-100 w-100">
-		<div class="col w-100 text-center">
-			<h1>Score: <% score %></h1>
-			<h4>Current sound: <% sound.folder + " / "+ sound.text%></h4>
-			<a 
-				id="button"
-				ng-click="click()" 
-				class="btn btn-success">
-				Click Me!</a>
+		<div class="d-flex flex-column w-100 text-center">
+			<div class="my-auto">
+				<h1>Pavlov Button</h1>
+				<h3>Score: <% score %></h3>
+				<h5>Current sound: <% sound.folder + " / "+ sound.text%></h5>
+				<a 
+					id="button"
+					ng-click="click()" 
+					class="btn btn-success">
+					Click Me!</a>
+			</div>
 		</div>
 	</div>
 		<!-- Custom JS -->
