@@ -19,20 +19,21 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 
     $scope.select_folder = function(folder) {
 		$scope.wordcloud_width = $("#wordcloud-col").width();
-		$scope.wordcloud_height = $("#wordcloud-col").height()*.8;
-		var max_word_size = $("#wordcloud-col").width()/10;
-		var min_word_size = max_word_size/5;
+		$scope.wordcloud_height = $("#wordcloud-col").height() * .8;
+		var max_word_size = $("#wordcloud-col").width() / 15;
+		var min_word_size = max_word_size / 4;
 		var range_word_size = max_word_size - min_word_size;
         $scope.selected_folder = folder;
         words = [];
-        for (i in $scope.sounds[folder]){
+        for (i in $scope.sounds[folder]) {
             sound = $scope.sounds[folder][i];
             var min_folder_size = metadata[folder].min_file_size;
             var range_folder_size = metadata[folder].max_file_size - min_folder_size;
             words.push({
 				folder: folder,
                 text: sound.text,
-                size: min_word_size + (range_word_size) * (sound.size - min_folder_size)/range_folder_size,
+				size: min_word_size + (range_word_size) * (sound.size - min_folder_size)/range_folder_size,
+				filesize: sound.size,
                 color: '#'+Math.floor(Math.random()*16777215).toString(16),
                 filename: sound['filename']
             });
@@ -43,7 +44,7 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 	$scope.select_sound = function(sound) {
 		$scope.selected_sound = sound;
 		$scope.$apply();
-		$scope.play_sound(sound)
+		$scope.play_sound(sound);
 	}
 
     $scope.play_sound = function(sound) {
@@ -52,6 +53,9 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 	}
 	
 	$scope.add_sound = function(sound) {
+		if (!sound.text) {
+			return;
+		}
 		for (var i = 0; i < $scope.selection.length; i++) {
 			if ($scope.selection[i].text == sound.text) {
 				return;
@@ -77,7 +81,7 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 	}
 	
 	$scope.download_selection = function(selection) {
-		json = generate_json(selection)
+		json = generate_json(selection);
 		var link = document.createElement("a");
     	link.download = "selection.txt";
     	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
@@ -92,7 +96,8 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 			json.push({
 				folder : sound.folder,
 				text : sound.text,
-				filename : sound.filename
+				filename : sound.filename,
+				filesize: sound.filesize
 			});
 		}
 		return json;

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Pavlovian Button
+{% endblock %}
+
+{% block body %}
+	<div class= "w-100 h-100"ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{folders}},{{metadata}})">
+		<!-- Custom JS -->
+		<script src="{{url_for('static', filename='scripts/wordcloud.js')}}"></script>
+	</div>
+{% endblock %}

@@ -41,10 +41,14 @@ def main():
 def word_cloud():
     return render_template("wordcloud.html", folders = folders, metadata = metadata)
 
+@app.route("/pavlov")
+def pavlov():
+	return render_template("pavlov.html", folders = folders, metadata = metadata)
+
 #route for static sound files
-@app.route("/sounds/<folder>/<sound>")
-def get_sound(folder, sound):
-    return app.send_static_file('sounds/{}/{}'.format(folder, sound))
+@app.route("/sounds/<folder>/<filename>")
+def get_sound(folder, filename):
+    return app.send_static_file('sounds/{}/{}'.format(folder, filename))
 
 # 404 handling
 @app.errorhandler(404)
