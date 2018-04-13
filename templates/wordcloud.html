@@ -5,8 +5,13 @@
 {% endblock %}
 
 {% block body %}
-	<div class= "w-100 h-100"ng-app="WordcloudApp" ng-controller="WordcloudCtrl" ng-cloak ng-init="init({{folders}},{{metadata}})">
-
+	<div 
+		class= "w-100 h-100"
+		ng-app="WordcloudApp" 
+		ng-controller="WordcloudCtrl" 
+		ng-init="init({{folders}},{{metadata}})"
+		ng-cloak>
+		
 		<div class="row justify-content-md-center">
 			<div class="col text-center">
 				<md-button 

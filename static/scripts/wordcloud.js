@@ -23,12 +23,12 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 		var max_word_size = $("#wordcloud-col").width() / 15;
 		var min_word_size = max_word_size / 4;
 		var range_word_size = max_word_size - min_word_size;
+		var min_folder_size = metadata[folder].min_file_size;
+		var range_folder_size = metadata[folder].max_file_size - min_folder_size;
         $scope.selected_folder = folder;
         words = [];
         for (i in $scope.sounds[folder]) {
             sound = $scope.sounds[folder][i];
-            var min_folder_size = metadata[folder].min_file_size;
-            var range_folder_size = metadata[folder].max_file_size - min_folder_size;
             words.push({
 				folder: folder,
                 text: sound.text,
@@ -83,7 +83,7 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 	$scope.download_selection = function(selection) {
 		json = generate_json(selection);
 		var link = document.createElement("a");
-    	link.download = "selection.txt";
+    	link.download = "selection.json";
     	var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
     	link.href = "data:" + data;
     	link.click();
