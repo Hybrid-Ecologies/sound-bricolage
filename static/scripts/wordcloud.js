@@ -97,7 +97,8 @@ app.controller("WordcloudCtrl", function($scope, $window, $element) {
 				folder : sound.folder,
 				text : sound.text,
 				filename : sound.filename,
-				filesize: sound.filesize
+				filesize: sound.filesize,
+				url: window.location.href.slice(0,-9) + "sounds/" + sound.folder + "/" + sound.filename
 			});
 		}
 		return json;
