@@ -52,7 +52,7 @@ Play any specific sound by name
 
 
 ### Binding sounds to DomElement MouseEvents
-> TODO: Add a better motivating scenario. Suppose you wanted to make an expressive "Trash" button interaction that would "creak" when you hovered over it and "crash" when pressed. Alter example code to fit the scenario. Add an examples folder with the example interaction.
+> TODO: Add a better motivating scenario. Suppose you wanted to make an expressive "Trash" button interaction that would "creak" when you hovered over it and "crash" when pressed. Alter example code to fit the scenario. Add an examples folder with the example interaction. The example should make convincing use of all the playTypes. 
 
 To bind sound to an event on a DomElement by id, options will override default options
 
