@@ -31,6 +31,13 @@ Additionally, collections of sounds can be specified as follows:
       swipes: ["/sounds/swipe1.wav"]
 > }
 ~~~
+### Triggering sounds
+Play any specific sound by name
+
+~~~
+> additionalOptions = {...}
+> sound_lib.play("sound1", additionalOptions)
+~~~
 
 ### Utility functions
 ~~~
@@ -43,13 +50,7 @@ Additionally, collections of sounds can be specified as follows:
 < ["sound1", "sound2", "sound3", ...] 
 ~~~
 
-### Triggering sounds
-Play any specific sound by name
 
-~~~
-> additionalOptions = {...}
-> sound_lib.play("sound1", additionalOptions)
-~~~
 ### Binding sounds to DomElement MouseEvents
 > TODO: Add a better motivating scenario. Suppose you wanted to make an expressive "Trash" button interaction that would "creak" when you hovered over it and "crash" when pressed. Alter example code to fit the scenario. Add an examples folder with the example interaction.
 
