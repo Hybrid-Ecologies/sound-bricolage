@@ -1,13 +1,13 @@
 # SoundBricolage
 Javascript utility for prototyping sound cues to DOM elements.
 
-# Dependencies
+## Dependencies
 > TODO: Mention jQuery Easy sound effects, give link here, explain how we use it.
 
-# Installation
+## Installation
 > TODO: How does one incoporate this into their projects?
 
-# API
+## API
 
 Create a new SoundUI object with your loaded array of selected sounds and default options, binding it to a DOM element.
 
@@ -32,7 +32,7 @@ Additionally, collections of sounds can be specified as follows:
 > }
 ~~~
 
-## Utility functions
+### Utility functions
 ~~~
 > # Hide sound prototype interface
 > sound_lib.hide()
@@ -43,14 +43,14 @@ Additionally, collections of sounds can be specified as follows:
 < ["sound1", "sound2", "sound3", ...] 
 ~~~
 
-## Triggering sounds
+### Triggering sounds
 Play any specific sound by name
 
 ~~~
 > additionalOptions = {...}
 > sound_lib.play("sound1", additionalOptions)
 ~~~
-## Binding sounds to MouseEvents
+### Binding sounds to DomElement MouseEvents
 Bind sound to an event on a DomElement by id, options will override default options
 
 Options, `playType` is how sound is played where `eventType` is the mouse event
