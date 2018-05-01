@@ -1,67 +1,71 @@
-#Documentation
-___
+# SoundBricolage
+Javascript utility for prototyping sound cues to DOM elements.
 
+# Dependencies
+> TODO: Mention jQuery Easy sound effects, give link here, explain how we use it.
 
-Create a new SoundUI object with your loaded array of selected sounds and default options, binding it to a DOM element
+# Installation
+> TODO: How does one incoporate this into their projects?
 
+# API
+
+Create a new SoundUI object with your loaded array of selected sounds and default options, binding it to a DOM element.
+
+A SoundLib acts as a manifest for a collection of sound files. 
+> TODO: Picture of interface
+
+To facilitate prototyping, a set of buttons will be generated and appended to the `dom` element, or by default to `<body>`. For each sound file, buttons will be generated for the `playTypes` specified, and play the sound when clicked.
 ~~~
-> sounds = [...]
-> options = {...}
-> mySoundUI = new SoundUI(sounds, options, elementID)
+> var options = {
+>   sounds: ["/sounds/1.wav", "/sounds/2.wav", "/sounds/3.wav"]
+> 	playTypes: ["oneShotPolyphonic", "oneShotMonophonic", "gate", "loop"]
+>   dom: $("#my-sounds")
+> };
+> sound_lib = new SoundLib(options)
+~~~
+Additionally, collections of sounds can be specified as follows: 
+~~~
+> var options = {
+>   sounds: { 
+      taps: ["/sounds/tap1.wav", "/sounds/tap2.wav"],
+      swipes: ["/sounds/swipe1.wav"]
+> }
 ~~~
 
-See sounds available in scope
-
+## Utility functions
 ~~~
-> mySoundUI.list()
+> # Hide sound prototype interface
+> sound_lib.hide()
+> # Show sound prototype interface
+> sound_lib.show()
+> # See sounds available in scope
+> sound_lib.list()
 < ["sound1", "sound2", "sound3", ...] 
 ~~~
 
+## Triggering sounds
 Play any specific sound by name
 
 ~~~
 > additionalOptions = {...}
-> mySoundUI.play("sound1")
+> sound_lib.play("sound1", additionalOptions)
 ~~~
+## Binding sounds to MouseEvents
+Bind sound to an event on a DomElement by id, options will override default options
 
-Bind sound to an event on an element by id, options will override default options
-
+Options, `playType` is how sound is played where `eventType` is the mouse event
+> TODO: Explain playTypes.
 ~~~
-> mySoundUI.bind("sound1","button1", options)
+> var bindOptions = {
+> 	playType: "oneShotPolyphonic" || "oneShotMonophonic" || "gate" || "loop"
+> 	eventType: "hover" || "click"
+> };
+> sound_lib.bind("sound1","button1", bindOptions);
 ~~~
 
 Removes all bound events from an element
-
 ~~~
->  mySoundUI.unbind("button1")
-~~~
-
-Get a list of all event bindings on an element
-
-~~~
-> mySoundUI.bindings("button1")
-< [{elementID:"button1", options:{...}, sound:"sound1"}, ...]
+>  sound_lib.unbind("button1")
 ~~~
 
-Hide bound element
 
-~~~
-> mySoundUI.hide()
-~~~
-
-Show bound element
-
-~~~
-> mySoundUI.show()
-~~~
-
-Options, `playType` is how sound is played where `eventType` is the triggering event
-
-~~~
-> var options = {
-> 	playType: "oneShotPolyphonic", 
-> 		// Could be "oneShotPolyphonic", "oneShotMonophonic" ,"gate" or "loop"
-> 	eventType: "hover",
-> 		// Could be "hover", "click"
-> }
-~~~
