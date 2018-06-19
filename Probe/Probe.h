@@ -4,6 +4,7 @@
  via Serial communication. 
 
  Created by Cesar Torres, 25 April 2018
+ Extended by Tony Zhao, 19 June 2018
  
  Header File Name: probe.h 
  Implementation File Name: probe.cpp
@@ -19,7 +20,7 @@
 		#include "WProgram.h"
 	#endif
 	
-	typedef void (*functype)(void);
+	typedef void (*functype)(int);
 
 	class Probe {
 		public:
@@ -37,7 +38,8 @@
 			char prefix = 0;
 			char buffer = ' ';
 		    void findCommandEnd();	
-			void api_call(char);
+			void api_call(char,int);
+			int value;
 			
 	};
 	

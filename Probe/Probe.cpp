@@ -18,10 +18,8 @@ void Probe::begin () {
 
 void Probe::findCommandEnd(){
   buffer = ' ';
-  while(buffer != '\n'){
-    if(port_.available() > 0){
-      buffer = port_.read();
-    } 
+  while(buffer != '\n' && port_.available() > 0){
+    buffer = port_.read();
   }
 }
 
@@ -36,7 +34,7 @@ void Probe::add_api(char msg, functype func){
 }
 
 
-void Probe::api_call(char prefix){
+void Probe::api_call(char prefix, int value){
 
    switch (prefix) {
     case 'p': 
@@ -45,17 +43,15 @@ void Probe::api_call(char prefix){
         port_.print(i);
         port_.print(" ");
         port_.println(myPrefixes[i]);
-        if(prefix == myPrefixes[i]){ myFuncs[i]();} 
       }
       // myFuncs[0]();
       findCommandEnd();
-      break;
     default: 
       bool found = false;
       // SEARCH FOR FUNCTION
       for(int i = 0; i < 10; i++){
         if(prefix == myPrefixes[i]){ 
-          myFuncs[i]();
+          myFuncs[i](value);
           found = true;
         } 
       }
@@ -73,6 +69,11 @@ void Probe::api_call(char prefix){
 void Probe::enable_api(){
   if (port_.available() > 0) {
     prefix = port_.read();
-    api_call(prefix);
+    if (port_.read() == ' ') {
+      value = port_.parseInt();
+    } else {
+      value = -1;
+    }
+    api_call(prefix, value);
   }
 }
